@@ -34,6 +34,46 @@ module Sprockets
         path = Pathname.new(path)
         ["#{self.class.name}:#{path.dirname.expand_path}", path.basename]
       end
+      
+      # Get the publicly-visible URL for an imported file. This URL is used by
+      # source maps to link to the source stylesheet. This may return `nil` to
+      # indicate that no public URL is available; however, this will cause
+      # sourcemap generation to fail if any CSS is generated from files imported
+      # from this importer.
+      #
+      # If an absolute "file:" URI can be produced for an imported file, that
+      # should be preferred to returning `nil`. However, a URL relative to
+      # `sourcemap_directory` should be preferred over an absolute "file:" URI.
+      #
+      # @param uri [String] A URI known to be valid for this importer.
+      # @param sourcemap_directory [String, NilClass] The absolute path to a
+      #   directory on disk where the sourcemap will be saved. If uri refers to
+      #   a file on disk that's accessible relative to sourcemap_directory, this
+      #   may return a relative URL. This may be `nil` if the sourcemap's
+      #   eventual location is unknown.
+      # @return [String?] The publicly-visible URL for this file, or `nil`
+      #   indicating that no publicly-visible URL exists. This should be
+      #   appropriately URL-escaped.
+      def public_url(uri, sourcemap_directory)
+        puts "\nIMPORTER\n\n"
+        puts "importer: uri=#{uri}\n"
+        puts "importer: sourcemap_directory=#{sourcemap_directory}\n\n"
+        
+        # Default to an absolute path.
+        result = "file:///#{uri}"
+        
+        # importer: uri=C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/assets/assets/bw-repayment-widget/stylesheets/print/_wiwo-results-manager.scss
+        # importer: sourcemap_directory=C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\assets\assets\bw-repayment-widget\stylesheets
+        # if (sourcemap_directory != nil)
+        #   begin
+        #     result = Pathname.new(uri).relative_path_from(Pathname.new(sourcemap_directory.gsub('\\', '/')))
+        #   rescue
+        #   end
+        # end
+        
+        # # Return the generated URL.
+        # result
+      end
 
       # @see Sass::Importers::Base#to_s
       def to_s
