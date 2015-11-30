@@ -62,8 +62,8 @@ module Sprockets
         # Default to an absolute path.
         result = "file:///#{uri}"
         
-        # importer: uri=C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/assets/assets/bw-repayment-widget/stylesheets/print/_wiwo-results-manager.scss
-        # importer: sourcemap_directory=C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\assets\assets\bw-repayment-widget\stylesheets
+        # # importer: uri=C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/assets/assets/bw-repayment-widget/stylesheets/print/_wiwo-results-manager.scss
+        # # importer: sourcemap_directory=C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\assets\assets\bw-repayment-widget\stylesheets
         # if (sourcemap_directory != nil)
         #   begin
         #     result = Pathname.new(uri).relative_path_from(Pathname.new(sourcemap_directory.gsub('\\', '/')))
