@@ -64,36 +64,40 @@ module Sprockets
         result = "file:///#{uri}"
         
         
-        ### !!! TESTING RELATIVE PATHS
-        # importer: uri=C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/assets/assets/bw-repayment-widget/stylesheets/print/_wiwo-results-manager.scss
-        # importer: sourcemap_directory=C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\assets\assets\bw-repayment-widget\stylesheets
+        # ### !!! TESTING RELATIVE PATHS
+        # # importer: uri=C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/assets/assets/bw-repayment-widget/stylesheets/print/_wiwo-results-manager.scss
+        # # importer: sourcemap_directory=C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\assets\assets\bw-repayment-widget\stylesheets
         
-        #importer: uri=                 C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/vendor/assets/wiwo-shared-lib/dist/src/wiwo-shared-lib/stylesheets/debug/debug.css.scss
-        #importer: sourcemap_directory= C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\vendor\assets\wiwo-shared-lib\dist\src\wiwo-shared-lib\stylesheets\debug
+        # #importer: uri=                 C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/vendor/assets/wiwo-shared-lib/dist/src/wiwo-shared-lib/stylesheets/debug/debug.css.scss
+        # #importer: sourcemap_directory= C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\vendor\assets\wiwo-shared-lib\dist\src\wiwo-shared-lib\stylesheets\debug
         
-        #importer: uri=                 C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/vendor/assets/wiwo-repayment-widget/dist/src/wiwo-repayment-widget/stylesheets/print.scss
-        #importer: sourcemap_directory= C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\assets\assets\bw-repayment-widget\stylesheets
-        if (sourcemap_directory != nil)
-          #begin
-            # Normalise to forward-slashes
-            result = Pathname.new(uri).relative_path_from(Pathname.new(sourcemap_directory.gsub('\\', '/'))).to_s
+        # #importer: uri=                 C:/Users/Coridyn/WidgetWorks/bankwest/bw-repayment-widget/build/vendor/assets/wiwo-repayment-widget/dist/src/wiwo-repayment-widget/stylesheets/print.scss
+        # #importer: sourcemap_directory= C:\Users\Coridyn\WidgetWorks\bankwest\bw-repayment-widget\build\assets\assets\bw-repayment-widget\stylesheets
+        # if (sourcemap_directory != nil)
+        #   #begin
+        #     # Normalise to forward-slashes
+        #     result = Pathname.new(uri).relative_path_from(Pathname.new(sourcemap_directory.gsub('\\', '/'))).to_s
             
-            # Ignore a leading 'vendor/assets/' and 'assets/assets/' path too.
-            # result.sub!(/..\/vendor\/assets\//, '../../')
-            final = result.sub(/..\/assets\/assets\//, '../../assets/')
-            final.sub!(/..\/vendor\/assets\//, '../../assets/')
+        #     # Replace the file extension.
+        #     result += '.mapped'
             
             
-            if (uri.index('_repayment-summary.scss') != nil)
-              puts "Rel   path: #{result}"
-              puts "Final path: #{final}"
-            end
+        #     # Ignore a leading 'vendor/assets/' and 'assets/assets/' path too.
+        #     # result.sub!(/..\/vendor\/assets\//, '../../')
+        #     final = result.sub(/..\/assets\/assets\//, '../../assets/')
+        #     final.sub!(/..\/vendor\/assets\//, '../../assets/')
             
-            result = final
             
-          #rescue
-          #end
-        end
+        #     if (uri.index('_repayment-summary.scss') != nil)
+        #       puts "Rel   path: #{result}"
+        #       puts "Final path: #{final}"
+        #     end
+            
+        #     result = final
+            
+        #   #rescue
+        #   #end
+        # end
         
         # Return the generated URL.
         result
